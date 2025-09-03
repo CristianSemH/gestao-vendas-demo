@@ -1,0 +1,16 @@
+$pagination-color: #1f263a;
+$pagination-border-color: #1f263a;
+
+$pagination-focus-color: #f7f4f4;
+$pagination-focus-bg: #1f263a;
+$pagination-focus-box-shadow: 0 0 0 0.25rem rgb(31 38 58 / 51%);
+
+$pagination-hover-color: #f7f4f4;
+$pagination-hover-bg: #1f263a;
+$pagination-hover-border-color: #1f263a;
+
+$pagination-active-color: #f7f4f4;
+$pagination-active-bg: #1f263a;
+$pagination-active-border-color: #1f263a;
+
+@import "../../../node_modules/bootstrap/scss/bootstrap";
