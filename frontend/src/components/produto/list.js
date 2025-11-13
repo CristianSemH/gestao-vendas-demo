@@ -99,8 +99,8 @@ const ProdutoList = () => {
                                     <td>{produto.id} </td>
                                     <td>{produto.descricao}</td>
                                     <td>{produto.categoria.descricao}</td>
-                                    <td>R$ {produto.valorVenda.replace('.', ',')}</td>
-                                    <td>R$ {produto.custoCompra.replace('.', ',')}</td>
+                                    <td>R$ {String(produto.valorVenda).replace('.', ',')}</td>
+                                    <td>R$ {String(produto.custoCompra).replace('.', ',')}</td>
                                 </tr>
                             )))}
                         </tbody>

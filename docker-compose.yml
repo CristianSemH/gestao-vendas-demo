@@ -1,0 +1,27 @@
+services:
+  frontend:
+    build: ./frontend
+    container_name: dev-frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+      CHOKIDAR_INTERVAL: 200
+      WATCHPACK_POLLING: "true"
+    depends_on:
+      - api
+
+  api:
+    build: ./api
+    container_name: dev-api
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./api:/app
+      - /app/node_modules
+    environment:
+      NODE_ENV: development
+      CHOKIDAR_USEPOLLING: "true"

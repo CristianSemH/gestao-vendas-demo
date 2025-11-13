@@ -23,7 +23,8 @@
     "express-promise-router": "^4.1.1",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.11.3",
-    "sequelize": "^6.35.0"
+    "sequelize": "^6.35.0",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "husky": "^8.0.3",

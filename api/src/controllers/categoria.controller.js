@@ -1,8 +1,7 @@
 
-const { formaPagamento } = require("../models")
-const treatment = require('./errorReturn');
+const { categoria } = require("../models")
+const treatment = require('./errorReturn')
 const { Op } = require("sequelize")
-
 
 exports.listAll = async (req, res) => {
 
@@ -10,17 +9,17 @@ exports.listAll = async (req, res) => {
     const limit = req.params.limit;
     const filter = req.params.filter ? req.params.filter : '';
 
-    await formaPagamento.findAndCountAll({
+    await categoria.findAndCountAll({
         order: [
             ['id', 'ASC']],
         where: {
             inativo: false,
             descricao: {
-                [Op.iLike]: '%' + filter + '%'
+                [Op.like]: '%' + filter + '%'
             }
         },
         offset,
-        ...(limit > 0 && { limit })
+        ...(limit > 0 && { limit }),
     }).then(({ count, rows }) => {
         res.status(200).send({ rows, count });
     }).catch(err => {
@@ -29,8 +28,8 @@ exports.listAll = async (req, res) => {
 };
 
 exports.create = async (req, res) => {
-    await formaPagamento.create(req.body).then(FormaPagamento => {
-        res.status(201).send(FormaPagamento);
+    await categoria.create(req.body).then(Categoria => {
+        res.status(201).send(Categoria);
     }).catch(err => {
         res.status(400).send(treatment.messages(err))
     })
@@ -38,13 +37,13 @@ exports.create = async (req, res) => {
 
 exports.findById = async (req, res) => {
     const id = parseInt(req.params.id);
-    await formaPagamento.findOne({
+    await categoria.findOne({
         where: {
             inativo: false,
             id
         }
-    }).then(FormaPagamento => {
-        res.status(200).send(FormaPagamento);
+    }).then(Categoria => {
+        res.status(200).send(Categoria);
     }).catch(err => {
         res.status(400).send(treatment.messages(err))
     })
@@ -53,15 +52,15 @@ exports.findById = async (req, res) => {
 exports.update = async (req, res) => {
     const { descricao } = req.body;
     const id = parseInt(req.params.id);
-    await formaPagamento.update({
+    await categoria.update({
         descricao
     }, {
         returning: true,
         where: {
             id
         }
-    }).then(([rowsUpdate, [FormaPagamento]]) => {
-        res.status(200).send(FormaPagamento);
+    }).then(([rowsUpdate, [Categoria]]) => {
+        res.status(200).send(Categoria);
     }).catch(err => {
         res.status(400).send(treatment.messages(err))
     })
@@ -69,7 +68,7 @@ exports.update = async (req, res) => {
 
 exports.delete = async (req, res) => {
     const id = parseInt(req.params.id);
-    await formaPagamento.update({
+    await categoria.update({
         inativo: true
     }, {
         where: {

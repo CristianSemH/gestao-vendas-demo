@@ -15,7 +15,7 @@ exports.listAll = async (req, res) => {
         where: {
             inativo: false,
             descricao: {
-                [Op.iLike]: '%' + filter + '%'
+                [Op.like]: '%' + filter + '%'
             }
         },
         offset,

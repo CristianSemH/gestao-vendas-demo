@@ -16,10 +16,10 @@ exports.listAll = async (req, res) => {
             const Cidade = await cidade.findOne({
                 where: {
                     nome: {
-                        [Op.iLike]: '%' + Cep.city + '%'
+                        [Op.like]: '%' + Cep.city + '%'
                     },
                     '$Estado.sigla$': {
-                        [Op.iLike]: '%' + Cep.state + '%'
+                        [Op.like]: '%' + Cep.state + '%'
                     }
                 },
                 include: [

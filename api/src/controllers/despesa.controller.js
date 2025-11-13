@@ -15,22 +15,22 @@ exports.listAll = async (req, res) => {
             [Op.or]: [
                 {
                     descricao: {
-                        [Op.iLike]: '%' + filter + '%'
+                        [Op.like]: '%' + filter + '%'
                     }
                 },
                 {
                     '$TipoSituacao.descricao$': {
-                        [Op.iLike]: '%' + filter + '%'
+                        [Op.like]: '%' + filter + '%'
                     }
                 },
                 {
                     '$TipoGasto.descricao$': {
-                        [Op.iLike]: '%' + filter + '%'
+                        [Op.like]: '%' + filter + '%'
                     }
                 },
                 {
                     '$FormaPagamento.descricao$': {
-                        [Op.iLike]: '%' + filter + '%'
+                        [Op.like]: '%' + filter + '%'
                     }
                 }
             ]

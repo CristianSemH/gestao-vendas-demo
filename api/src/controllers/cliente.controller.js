@@ -17,22 +17,22 @@ exports.listAll = async (req, res) => {
             [Op.or]: [
                 {
                     nome: {
-                        [Op.iLike]: '%' + filter + '%'
+                        [Op.like]: '%' + filter + '%'
                     }
                 },
                 {
                     cpf: {
-                        [Op.iLike]: '%' + filter + '%'
+                        [Op.like]: '%' + filter + '%'
                     }
                 },
                 {
                     cnpj: {
-                        [Op.iLike]: '%' + filter + '%'
+                        [Op.like]: '%' + filter + '%'
                     }
                 },
                 {
                     celular: {
-                        [Op.iLike]: '%' + filter + '%'
+                        [Op.like]: '%' + filter + '%'
                     }
                 }
             ]

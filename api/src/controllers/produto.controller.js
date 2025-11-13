@@ -17,12 +17,12 @@ exports.listAll = async (req, res) => {
             [Op.or]: [
                 {
                     descricao: {
-                        [Op.iLike]: '%' + filter + '%'
+                        [Op.like]: '%' + filter + '%'
                     }
                 },
                 {
                     '$categoria.descricao$': {
-                        [Op.iLike]: '%' + filter + '%'
+                        [Op.like]: '%' + filter + '%'
                     }
                 }
             ]
@@ -51,12 +51,12 @@ exports.listAllFilter = async (req, res) => {
             [Op.or]: [
                 {
                     descricao: {
-                        [Op.iLike]: '%' + filter + '%'
+                        [Op.like]: '%' + filter + '%'
                     }
                 },
                 {
                     '$categoria.descricao$': {
-                        [Op.iLike]: '%' + filter + '%'
+                        [Op.like]: '%' + filter + '%'
                     }
                 }
             ]

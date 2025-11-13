@@ -22,7 +22,7 @@ const InputForm = () => {
     const { register, handleSubmit, reset, control, setValue } = useForm()
 
     const formatInputNumber = useCallback((valor) => {
-        const inputNumber = parseFloat(valor.replace(/[^0-9]/g, ''));
+        const inputNumber = parseFloat(String(valor).replace(/[^0-9]/g, ''));
 
         return !isNaN(inputNumber) ? (inputNumber / 100).toFixed(2) : 0
     },

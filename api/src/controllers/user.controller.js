@@ -16,7 +16,7 @@ exports.listAll = async (req, res) => {
             ['id', 'ASC']],
         where: {
             usuario: {
-                [Op.iLike]: '%' + filter + '%'
+                [Op.like]: '%' + filter + '%'
             },
             visivel: true
         },
@@ -108,8 +108,8 @@ exports.delete = async (req, res) => {
 
 exports.createDefaultUser = async (req, res) => {
 
-    const username = 'toretto';
-    const password = 'briantheconan';
+    const username = 'admin.demo';
+    const password = 'admin.demo';
     const hashedPassword = await bcrypt.hash(password, 10);
 
     await user.create({ usuario: username, senha: hashedPassword }).then(User => {

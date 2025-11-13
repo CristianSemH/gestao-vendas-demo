@@ -25,7 +25,8 @@ const cep = require('./routes/cep.route');
 
 const { sequelize } = require('./models')
 
-app.use(express.static(path.resolve(__dirname, '../client/build')));
+/*
+app.use(express.static(path.resolve(__dirname, '../client/build')));*/
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -48,10 +49,10 @@ app.use('/api/', orcamentoVendaItem);
 app.use('/api/', clienteendereco);
 app.use('/api/', despesa);
 app.use('/api/', cep);
-
+/*
 app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
-  });
+  });*/
 
 sequelize.sync().then(() => {
     console.log("conectado ao banco")
