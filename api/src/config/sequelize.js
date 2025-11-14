@@ -4,3 +4,5 @@ const configDataBase = require('./database');
 const sequelize = new Sequelize(configDataBase);
 
 module.exports = sequelize;
+
+

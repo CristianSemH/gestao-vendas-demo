@@ -71,22 +71,31 @@ exports.findById = async (req, res) => {
 exports.update = async (req, res) => {
     const { nome, TipoPessoa, cpf, cnpj, celular } = req.body;
     const id = parseInt(req.params.id);
-    await cliente.update({
-        nome,
-        TipoPessoa,
-        cpf,
-        cnpj,
-        celular
-    }, {
-        returning: true,
-        where: {
-            id
+    try {
+        const [rowsUpdate] = await cliente.update({
+            nome,
+            TipoPessoa,
+            cpf,
+            cnpj,
+            celular
+        }, {
+            returning: true,
+            where: {
+                id
+            }
+        })
+
+        if (rowsUpdate === 0) {
+            return res.status(404).json({ message: 'Registro não encontrado' });
         }
-    }).then(([rowsUpdate, [Cliente]]) => {
-        res.status(200).send(Cliente);
-    }).catch(err => {
+
+        const atualizado = await cliente.findByPk(id);
+
+        return res.status(200).json(atualizado);
+
+    } catch (err) {
         res.status(400).send(treatment.messages(err))
-    })
+    }
 };
 
 exports.delete = async (req, res) => {

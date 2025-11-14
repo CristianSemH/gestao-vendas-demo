@@ -52,18 +52,28 @@ exports.findById = async (req, res) => {
 exports.update = async (req, res) => {
     const { descricao } = req.body;
     const id = parseInt(req.params.id);
-    await tipoEndereco.update({
-        descricao
-    }, {
-        returning: true,
-        where: {
-            id
+
+    try {
+        const [rowsUpdate] = await tipoEndereco.update({
+            descricao
+        }, {
+            returning: true,
+            where: {
+                id
+            }
+        })
+
+        if (rowsUpdate === 0) {
+            return res.status(404).json({ message: 'Registro não encontrado' });
         }
-    }).then(([rowsUpdate, [TipoEndereco]]) => {
-        res.status(200).send(TipoEndereco);
-    }).catch(err => {
+
+        const atualizado = await tipoEndereco.findByPk(id);
+
+        return res.status(200).json(atualizado);
+
+    } catch (err) {
         res.status(400).send(treatment.messages(err))
-    })
+    }
 };
 
 exports.delete = async (req, res) => {

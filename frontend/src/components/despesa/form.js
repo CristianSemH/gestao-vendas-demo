@@ -32,7 +32,7 @@ const InputForm = () => {
     registerLocale("pt", pt);
 
     const formatInputNumber = useCallback((valor) => {
-        const inputNumber = parseFloat(valor.replace(/[^0-9]/g, ''));
+        const inputNumber = parseFloat(String(valor).replace(/[^0-9]/g, ''));
 
         return !isNaN(inputNumber) ? (inputNumber / 100).toFixed(2) : 0
     },
@@ -256,8 +256,9 @@ const InputForm = () => {
                                 </div>
 
                                 <div className="col-md-12 mt-3 mb-3">
-                                    <FloatingLabel controlId="observacao" label="Observação" {...register("observacao")} >
+                                    <FloatingLabel controlId="observacao" label="Observação">
                                         <Form.Control
+                                            {...register("observacao")}
                                             as="textarea"
                                             style={{ height: '150px' }}
                                         />

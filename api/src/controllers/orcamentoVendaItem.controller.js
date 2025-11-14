@@ -43,23 +43,32 @@ exports.update = async (req, res) => {
         valor,
         idOrcamentoVenda } = req.body;
     const id = parseInt(req.params.id);
-    await orcamentoVendaItem.update({
-        idProduto,
-        descricaoProduto,
-        quantidade,
-        valor,
-        idOrcamentoVenda
-    }, {
-        returning: true,
-        where: {
-            id
+    
+    try {
+        const [rowsUpdate] = await orcamentoVendaItem.update({
+            idProduto,
+            descricaoProduto,
+            quantidade,
+            valor,
+            idOrcamentoVenda
+        }, {
+            returning: true,
+            where: {
+                id
+            }
+        })
+
+        if (rowsUpdate === 0) {
+            return res.status(404).json({ message: 'Registro não encontrado' });
         }
-    }).then(([rowsUpdate, [OrcamentoVendaItem]]) => {
-        totalize.totalizeOrcamentoVenda(idOrcamentoVenda)
-        res.status(200).send(OrcamentoVendaItem);
-    }).catch(err => {
-        res.status(400).send(err);
-    })
+
+        const atualizado = await orcamentoVendaItem.findByPk(id);
+
+        return res.status(200).json(atualizado);
+
+    } catch (err) {
+        res.status(400).send(treatment.messages(err))
+    }
 };
 
 exports.delete = async (req, res) => {

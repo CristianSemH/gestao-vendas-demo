@@ -110,7 +110,7 @@ exports.findById = async (req, res) => {
                 where: {
                     inativo: false
                 }
-            }, 
+            },
             {
                 model: cliente,
                 required: false
@@ -163,7 +163,6 @@ exports.update = async (req, res) => {
         observacao: req.body.observacao,
         OrcamentoVendaItems: Items
     }
-
     const validateOrcamentoVenda = await orcamentoVenda.build(OrcamentoVenda).validate()
         .then(() => {
             return []

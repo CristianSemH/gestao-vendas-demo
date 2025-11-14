@@ -51,6 +51,7 @@ exports.findById = async (req, res) => {
 }
 
 exports.update = async (req, res) => {
+
     const { idTipoEndereco,
         EnderecoPadrao,
         cep,
@@ -62,27 +63,37 @@ exports.update = async (req, res) => {
         IdCidade,
         idCliente } = req.body;
     const id = parseInt(req.params.id);
-    await endereco.update({
-        idTipoEndereco,
-        EnderecoPadrao,
-        cep,
-        logradouro,
-        numero,
-        bairro,
-        complemento,
-        referencia,
-        IdCidade,
-        idCliente
-    }, {
-        returning: true,
-        where: {
-            id
+
+    try {
+        const [rowsUpdate] = await endereco.update({
+            idTipoEndereco,
+            EnderecoPadrao,
+            cep,
+            logradouro,
+            numero,
+            bairro,
+            complemento,
+            referencia,
+            IdCidade,
+            idCliente
+        }, {
+            returning: true,
+            where: {
+                id
+            }
+        })
+
+        if (rowsUpdate === 0) {
+            return res.status(404).json({ message: 'Registro não encontrado' });
         }
-    }).then(([rowsUpdate, [Endereco]]) => {
-        res.status(200).send(Endereco);
-    }).catch(err => {
-        res.status(400).send(err);
-    })
+
+        const atualizado = await endereco.findByPk(id);
+
+        return res.status(200).json(atualizado);
+
+    } catch (err) {
+        res.status(400).send(treatment.messages(err))
+    }
 };
 
 exports.delete = async (req, res) => {

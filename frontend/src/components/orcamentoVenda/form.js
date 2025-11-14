@@ -43,7 +43,7 @@ const InputForm = () => {
     })
 
     const formatInputNumber = useCallback((valor) => {
-        const inputNumber = parseFloat(valor.replace(/[^0-9]/g, ''));
+        const inputNumber = parseFloat(String(valor).replace(/[^0-9]/g, ''));
 
         return !isNaN(inputNumber) ? (inputNumber / 100).toFixed(2) : 0
     },
@@ -338,8 +338,9 @@ const InputForm = () => {
                                         <InputNumber valueForm={frete} label="Frete" setValueForm={methods.setValue} setValue={setFrete} name="frete"></InputNumber>
                                     </div>
                                     <div className="col-md-12">
-                                        <FloatingLabel controlId="observacao" label="Observação" {...methods.register("observacao")} >
+                                        <FloatingLabel controlId="observacao" label="Observação" >
                                             <Form.Control
+                                                {...methods.register("observacao")}
                                                 as="textarea"
                                                 style={{ height: '150px' }}
                                             />

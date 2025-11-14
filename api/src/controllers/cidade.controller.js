@@ -41,19 +41,28 @@ exports.findById = async (req, res) => {
 exports.update = async (req, res) => {
     const { nome, idEstado } = req.body;
     const id = parseInt(req.params.id);
-    await cidade.update({
-        nome,
-        idEstado
-    }, {
-        returning: true,
-        where: {
-            id
+    try {
+        const [rowsUpdate] = await cidade.update({
+            nome,
+            idEstado
+        }, {
+            returning: true,
+            where: {
+                id
+            }
+        })
+
+        if (rowsUpdate === 0) {
+            return res.status(404).json({ message: 'Registro não encontrado' });
         }
-    }).then(([rowsUpdate, [Cidade]]) => {
-        res.status(200).send(Cidade);
-    }).catch(err => {
-        res.status(400).send(err);
-    })
+
+        const atualizado = await cidade.findByPk(id);
+
+        return res.status(200).json(atualizado);
+
+    } catch (err) {
+        res.status(400).send(treatment.messages(err))
+    }
 };
 
 exports.delete = async (req, res) => {

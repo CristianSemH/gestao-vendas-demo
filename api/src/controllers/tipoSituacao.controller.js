@@ -72,22 +72,31 @@ exports.update = async (req, res) => {
     const id = parseInt(req.params.id);
     const tipo = TipoValidar(req.params.tipo, res)
 
-    await tipoSituacao.update({
-        descricao,
-        corHexaDecimalFundo,
-        corHexaDecimalFonte,
-        baseSituacao
-    }, {
-        returning: true,
-        where: {
-            id: req.params.id,
-            tipo
+    try {
+        const [rowsUpdate] = await tipoSituacao.update({
+            descricao,
+            corHexaDecimalFundo,
+            corHexaDecimalFonte,
+            baseSituacao
+        }, {
+            returning: true,
+            where: {
+                id: req.params.id,
+                tipo
+            }
+        })
+
+        if (rowsUpdate === 0) {
+            return res.status(404).json({ message: 'Registro não encontrado' });
         }
-    }).then(([rowsUpdate, [updatedTipoSituacao]]) => {
-        res.status(200).send(updatedTipoSituacao);
-    }).catch(err => {
+
+        const atualizado = await tipoSituacao.findByPk(id);
+
+        return res.status(200).json(atualizado);
+
+    } catch (err) {
         res.status(400).send(treatment.messages(err))
-    })
+    }
 };
 
 exports.delete = async (req, res) => {

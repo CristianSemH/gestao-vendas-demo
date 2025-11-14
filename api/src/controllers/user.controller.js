@@ -82,19 +82,29 @@ exports.update = async (req, res) => {
     const { senha, usuario } = req.body;
     const id = parseInt(req.params.id);
     const hashedPassword = await bcrypt.hash(senha, 10);
-    await user.update({
-        usuario,
-        senha: hashedPassword
-    }, {
-        returning: true,
-        where: {
-            id
+
+    try {
+        const [rowsUpdate] = await user.update({
+            usuario,
+            senha: hashedPassword
+        }, {
+            returning: true,
+            where: {
+                id
+            }
+        })
+
+        if (rowsUpdate === 0) {
+            return res.status(404).json({ message: 'Registro não encontrado' });
         }
-    }).then(([rowsUpdate, [updatedUser]]) => {
-        res.status(200).send(updatedUser);
-    }).catch(err => {
+
+        const atualizado = await user.findByPk(id);
+
+        return res.status(200).json(atualizado);
+
+    } catch (err) {
         res.status(400).send(treatment.messages(err))
-    })
+    }
 };
 
 exports.delete = async (req, res) => {

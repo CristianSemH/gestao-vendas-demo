@@ -53,18 +53,27 @@ exports.findById = async (req, res) => {
 exports.update = async (req, res) => {
     const { descricao } = req.body;
     const id = parseInt(req.params.id);
-    await formaPagamento.update({
-        descricao
-    }, {
-        returning: true,
-        where: {
-            id
+
+    try {
+        const [rowsUpdate] = await formaPagamento.update({
+            descricao
+        }, {
+            returning: true,
+            where: {
+                id
+            }
+        })
+        if (rowsUpdate === 0) {
+            return res.status(404).json({ message: 'Registro não encontrado' });
         }
-    }).then(([rowsUpdate, [FormaPagamento]]) => {
-        res.status(200).send(FormaPagamento);
-    }).catch(err => {
+
+        const atualizado = await formaPagamento.findByPk(id);
+
+        return res.status(200).json(atualizado);
+
+    } catch (err) {
         res.status(400).send(treatment.messages(err))
-    })
+    }
 };
 
 exports.delete = async (req, res) => {

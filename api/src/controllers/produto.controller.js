@@ -8,7 +8,7 @@ exports.listAll = async (req, res) => {
     const offset = req.params.offset;
     const limit = req.params.limit;
     const filter = req.params.filter ? req.params.filter : '';
-    
+
     await produto.findAndCountAll({
         order: [
             ['id', 'ASC']],
@@ -97,23 +97,30 @@ exports.findById = async (req, res) => {
 
 exports.update = async (req, res) => {
     const { descricao, idCategoria, valorVenda, custoCompra } = req.body;
-    const id = parseInt(req.params.id);
-    await produto.update({
-        descricao,
-        idCategoria,
-        valorVenda,
-        custoCompra
-    }, {
-        returning: true,
-        where: {
-            id
+    const id = parseInt(req.params.id, 10);
+
+    try {
+        const [rowsUpdate] = await produto.update(
+            { descricao, idCategoria, valorVenda, custoCompra },
+            {
+                where: { id },
+                returning: true
+            }
+        );
+
+        if (rowsUpdate === 0) {
+            return res.status(404).json({ message: 'Registro não encontrado' });
         }
-    }).then(([rowsUpdate, [Produto]]) => {
-        res.status(200).send(Produto);
-    }).catch(err => {
+
+        const produtoAtualizado = await produto.findByPk(id);
+
+        return res.status(200).json(produtoAtualizado);
+
+    } catch (err) {
         res.status(400).send(treatment.messages(err))
-    })
+    }
 };
+
 
 exports.delete = async (req, res) => {
     const id = parseInt(req.params.id);
