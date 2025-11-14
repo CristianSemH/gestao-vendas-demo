@@ -1,10 +1,10 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import Alert from '../../components/custom/alert';
 import { LoginUser } from '../../services/usuario'
 import { useNavigate } from 'react-router-dom';
 import StoreContext from '../context/Context';
-import logo from '../../img/logo.png'
+
 
 const FormLogin = () => {
 
@@ -40,8 +40,7 @@ const FormLogin = () => {
         <div className="main-login-container">
             <div className="main-login">
                 <div className='main-login-banner'>
-                    <h3>Toretto comunicação visual</h3>
-                    <img src={logo} alt="Logo" />
+                    <h3>Sistema de gestão de vendas</h3>
                 </div>
                 <div className='main-login-form position-relative'>
                     <div className="position-absolute end-0 top-0 m-2">

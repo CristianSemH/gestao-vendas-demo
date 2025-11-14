@@ -1,6 +1,5 @@
 import pdfMake from 'pdfmake/build/pdfmake'
 import pdfFonts from 'pdfmake/build/vfs_fonts'
-import base64 from './getlogo';
 import moment from 'moment';
 
 const OrcamentoVendasPDF = async (OrcamentoVendas) => {
@@ -21,12 +20,12 @@ const OrcamentoVendasPDF = async (OrcamentoVendas) => {
                     },
                     margin: [30, 30, 0, 30]
                 },
-                {
+                /*{
                     image: base64.logo,
                     width: 110,
                     alignment: 'right',
                     margin: [0, 15, 30, 0]
-                }
+                }*/
 
             ]
         }, {
@@ -210,11 +209,11 @@ const OrcamentoVendasPDF = async (OrcamentoVendas) => {
             columns: [
 
                 [
-                    {
+                    /*{
                         image: base64.footer,
                         width: 280,
                         alignment: 'center'
-                    }
+                    }*/
                 ]
 
             ]

@@ -68,10 +68,10 @@ docker-compose up --build
 
 Serviços:
 
-  Serviço    Porta   Descrição
-  ---------- ------- -----------
-  frontend   3000    React
-  api        3001    Node.js
+  |Serviço    |Porta   |Descrição |
+  |-----------|--------|----------|
+  |frontend   |3000    |React     |
+  |api        |3001    |Node.js   |
 
 ## 🔧 Backend
 

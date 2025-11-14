@@ -24,7 +24,7 @@ const Nav = ({ MenuOpen, setMenuOpen }) => {
                         <img src={logo} alt="Logo" />
                     </div>
                     <div className="nav-header-name-description">
-                        <span>Toretto</span>
+                        <span>Cristian Borges</span>
                     </div>
                 </div>
 
