@@ -53,5 +53,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://api:3001"
+  "proxy": "https://gestao-vendas-demo-api.onrender.com"
 }
