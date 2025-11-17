@@ -1,5 +1,5 @@
 const ConfigApi = {
-    baseUrl: '/api'
+    baseUrl: 'https://gestao-vendas-demo-api.onrender.com/api'
 }
 
 export default ConfigApi
