@@ -45,7 +45,7 @@ const Nav = ({ MenuOpen, setMenuOpen }) => {
                         <Link to="/orcamentovenda"><ion-icon name="cart-outline"></ion-icon><div className="nav-item-title"> Orçamento e vendas</div></Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/despesa"><ion-icon name="beer-outline"></ion-icon><div className="nav-item-title"> Despesa</div></Link>
+                        <Link to="/despesa"><ion-icon name="fast-food-outline"></ion-icon><div className="nav-item-title"> Despesa</div></Link>
                     </li>
                     <li className="nav-item">
                         <Link to="/usuario"><ion-icon name="person-circle-outline"></ion-icon><div className="nav-item-title"> Usuários</div></Link>
@@ -64,7 +64,7 @@ const Nav = ({ MenuOpen, setMenuOpen }) => {
                     </li>
 
                     <li className="nav-item">
-                        <Link to="/tiposituacaodespesa"><ion-icon name="beer-outline"></ion-icon><div className="nav-item-title"> Tipo situação despesa</div></Link>
+                        <Link to="/tiposituacaodespesa"><ion-icon name="fast-food-outline"></ion-icon><div className="nav-item-title"> Tipo situação despesa</div></Link>
                     </li>
 
                 </ul>

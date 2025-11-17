@@ -9,6 +9,7 @@ import StoreContext from '../context/Context';
 const FormLogin = () => {
 
     const [MesssagesError, setMesssagesError] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
 
     const { register, handleSubmit } = useForm()
 
@@ -17,6 +18,7 @@ const FormLogin = () => {
     const navigate = useNavigate()
 
     const handleLogin = async (user) => {
+        setIsLoading(true)
         setMesssagesError([])
 
         await LoginUser(user).then(Result => {
@@ -54,16 +56,22 @@ const FormLogin = () => {
                         <form className='login-form' onSubmit={handleSubmit(handleLogin)}>
 
                             <div className='mb-3'>
-                                <input placeholder='Usuário' type="text" {...register("usuario")} />
+                                <input placeholder='Usuário' type="text" {...register("usuario")} value="admin.demo" disabled />
                             </div>
 
                             <div className='mb-3'>
-                                <input placeholder='Senha' type="password" {...register("senha")} />
+                                <input placeholder='Senha' type="password" {...register("senha")} value="admin.demo" disabled />
                             </div>
 
                             <div className='mb-3'>
                                 <button className='' type="submit">
-                                    Entrar
+                                    {!isLoading ?
+                                        'Entrar'
+                                        :
+                                        <div className="spinner-border" role="status">
+                                            <span className="visually-hidden">Loading...</span>
+                                        </div>
+                                    }
                                 </button>
                             </div>
                         </form>

@@ -1,106 +1,50 @@
-# 🛒 Gestão de Vendas
+# 🛒  Gestão de vendas Web
+Frontend do sistema de gestão de vendas, desenvolvido com **React 18**, **React Bootstrap** e ferramentas modernas de formulários e relatórios.
 
-Sistema completo de gerenciamento de vendas com API em Node.js +
-Frontend em React, rodando em ambiente Docker para desenvolvimento.
+## 🚀 Tecnologias
+- React 18
+- React Router DOM
+- React Hook Form
+- React Bootstrap + Bootstrap 5
+- React Select
+- React Datepicker
+- FontAwesome
+- Axios
+- pdfmake
+- dayjs / moment / date-fns
+- js-cookie
 
-## 📌 Visão Geral
-
-Este projeto é uma aplicação full-stack composta por:
-
--   **Backend (API):** Node.js + Express + Sequelize\
--   **Frontend:** React + React-Bootstrap\
--   **Banco de Dados:** SQLite durante desenvolvimento (com suporte a PostgreSQL)\
--   **Ambiente:** Docker + docker-compose
-
-O objetivo do sistema é fornecer uma base simples e direta para um fluxo
-de vendas, cadastro de usuários, autenticação JWT e geração de
-relatórios.
-
-## 🏗️ Arquitetura do Projeto
-
-    gestao-vendas-demo/
-     ├── api/          → Backend Node.js (Express, Sequelize, JWT)
-     ├── frontend/     → Frontend React
-     ├── docker-compose.yml
-     └── README.md
-
-## 🚀 Tecnologias Utilizadas
-
-### Backend (Node.js)
-
--   express
--   express-promise-router
--   sequelize
--   pg / sqlite3
--   jsonwebtoken
--   bcrypt
--   dotenv
--   axios
--   nodemon
-
-### Frontend (React)
-
--   React 18
--   React Router DOM
--   React Hook Form
--   React Bootstrap
--   Bootstrap 5
--   React Select
--   React Datepicker
--   FontAwesome
--   Axios
--   pdfmake
--   dayjs / moment / date-fns
--   js-cookie
-
-### Ambiente
-
--   Docker
--   docker-compose
-
-## 🐳 Docker - Desenvolvimento
-
-Para iniciar:
-
-``` bash
-docker-compose up --build
+## 📂 Estrutura
+```
+frontend/
+ ├── src/
+ │    ├── components/
+ │    ├── pages/
+ │    ├── services/
+ │    └── App.js
+ ├── public/
+ └── package.json
 ```
 
-Serviços:
-
-  |Serviço    |Porta   |Descrição |
-  |-----------|--------|----------|
-  |frontend   |3000    |React     |
-  |api        |3001    |Node.js   |
-
-## 🔧 Backend
-
-Scripts:
-
-``` bash
-npm run dev
-npm start
-npm run lint
+## ▶️ Scripts
+```bash
+npm start   # desenvolvimento
+npm build   # produção
+npm test    # testes
 ```
 
-## 🎨 Frontend
+## 🌐 Conexão com a API
+Configure o endpoint principal em um serviço Axios:
 
-Scripts:
-
-``` bash
-npm start
-npm build
-npm test
+```js
+axios.defaults.baseURL = "https://api.seuservidor.com";
 ```
 
-## 🔐 Autenticação
+Para Docker local:
 
-JWT + cookies + middlewares.
+```
+http://api:3001
+```
 
-## 📂 Variáveis de Ambiente
-
-Arquivo `api/.env`:
-
-    JWT_SECRET=sua_chave
-    DATABASE_URL=sqlite:./database.sqlite
-    PORT=3001
+## 🐳 Docker
+O frontend foi preparado para rodar com hot reload em ambiente Docker.
